@@ -37,7 +37,8 @@ RUN curl -SLO "https://sourceforge.net/projects/guacamole/files/current/source/g
   && make \
   && make install \
   && cd .. \
-  && rm -rf guacamole-server-${GUAC_VER}.tar.gz guacamole-server-${GUAC_VER}
+  && rm -rf guacamole-server-${GUAC_VER}.tar.gz guacamole-server-${GUAC_VER} \
+  && ldconfig
 
 # Install guacamole-client and postgres auth adapter
 RUN rm -rf ${CATALINA_HOME}/webapps/ROOT \
@@ -53,8 +54,6 @@ ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
 ENV GUACAMOLE_HOME=/config/guacamole
 
 WORKDIR /config
-
-RUN ldconfig
 
 COPY root /
 
