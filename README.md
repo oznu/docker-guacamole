@@ -1,6 +1,8 @@
 # Docker Guacamole
 
-A Docker Container for [Apache Guacamole](https://guacamole.incubator.apache.org/), a client-less remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH over HTML5.
+A Docker Container for [Apache Guacamole](https://guacamole.incubator.apache.org/), a clientless remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH over HTML5.
+  
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/esgaHNRxdhY/0.jpg)](http://www.youtube.com/watch?v=esgaHNRxdhY "Video Title")
 
 This container runs the guacamole web client, the guacd server and a postgres database.
 
