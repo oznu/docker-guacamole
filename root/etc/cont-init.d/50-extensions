@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv sh
+
+# clean up extensions
+for i in auth-ldap auth-duo auth-header auth-noauth auth-cas; do
+  rm -rf ${GUACAMOLE_HOME}/extensions/guacamole-${i}-${GUAC_VER}.jar
+done
+
+# enable extensions
+for i in $(echo "$EXTENSIONS" | tr "," " "); do
+  cp ${GUACAMOLE_HOME}/extensions-available/guacamole-${i}-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions
+done

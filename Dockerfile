@@ -51,11 +51,15 @@ RUN rm -rf ${CATALINA_HOME}/webapps/ROOT \
   && cp -R guacamole-auth-jdbc-${GUAC_VER}/postgresql/schema ${GUACAMOLE_HOME}/ \
   && rm -rf guacamole-auth-jdbc-${GUAC_VER} guacamole-auth-jdbc-${GUAC_VER}.tar.gz
 
-# Add optional extensions that don't break the system when not configured
-  RUN curl -SLO "https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-ldap-${GUAC_VER}.tar.gz" \
-    && tar -xzf guacamole-auth-ldap-${GUAC_VER}.tar.gz \
-    && cp guacamole-auth-ldap-${GUAC_VER}/guacamole-auth-ldap-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions/ \
-    && rm -rf guacamole-auth-ldap-${GUAC_VER} guacamole-auth-ldap-${GUAC_VER}.tar.gz
+# Add optional extensions
+  RUN mkdir ${GUACAMOLE_HOME}/extensions-available \
+    && for i in auth-ldap auth-duo auth-header auth-noauth auth-cas; do \
+    echo "https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-${i}-${GUAC_VER}.tar.gz" \
+    && curl -SLO "https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-${i}-${GUAC_VER}.tar.gz" \
+    && tar -xzf guacamole-${i}-${GUAC_VER}.tar.gz \
+    && cp guacamole-${i}-${GUAC_VER}/guacamole-${i}-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions-available/ \
+    && rm -rf guacamole-${i}-${GUAC_VER} guacamole-${i}-${GUAC_VER}.tar.gz \
+  ;done
 
 ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
 ENV GUACAMOLE_HOME=/config/guacamole
