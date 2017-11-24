@@ -9,8 +9,9 @@ ENV PG_MAJOR=9.6 \
   POSTGRES_DB=guacamole_db
 
 # Apply the s6-overlay
+
 RUN curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v1.20.0.0/s6-overlay-amd64.tar.gz" \
-  && tar -xzf s6-overlay-amd64.tar.gz -C / --exclude="./bin" --exclude="./sbin" \
+  && tar -xzf s6-overlay-amd64.tar.gz -C / \
   && tar -xzf s6-overlay-amd64.tar.gz -C /usr ./bin \
   && rm -rf s6-overlay-amd64.tar.gz \
   && mkdir -p ${GUACAMOLE_HOME} \
@@ -49,6 +50,12 @@ RUN rm -rf ${CATALINA_HOME}/webapps/ROOT \
   && cp -R guacamole-auth-jdbc-${GUAC_VER}/postgresql/guacamole-auth-jdbc-postgresql-0.9.13-incubating.jar ${GUACAMOLE_HOME}/extensions/ \
   && cp -R guacamole-auth-jdbc-${GUAC_VER}/postgresql/schema ${GUACAMOLE_HOME}/ \
   && rm -rf guacamole-auth-jdbc-${GUAC_VER} guacamole-auth-jdbc-${GUAC_VER}.tar.gz
+
+# Add optional extensions that don't break the system when not configured
+  RUN curl -SLO "https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-ldap-${GUAC_VER}.tar.gz" \
+    && tar -xzf guacamole-auth-ldap-${GUAC_VER}.tar.gz \
+    && cp guacamole-auth-ldap-${GUAC_VER}/guacamole-auth-ldap-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions/ \
+    && rm -rf guacamole-auth-ldap-${GUAC_VER} guacamole-auth-ldap-${GUAC_VER}.tar.gz
 
 ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
 ENV GUACAMOLE_HOME=/config/guacamole
