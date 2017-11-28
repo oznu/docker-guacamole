@@ -27,8 +27,11 @@ RUN apt-get update && apt-get install -y \
     libswscale-dev libfreerdp-dev libpango1.0-dev \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
     libpulse-dev libssl-dev libvorbis-dev libwebp-dev \
-    postgresql-${PG_MAJOR} \
+    ghostscript postgresql-${PG_MAJOR} \
   && rm -rf /var/lib/apt/lists/*
+
+# Link FreeRDP to where guac expects it to be
+RUN ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp
 
 # Install guacamole-server
 RUN curl -SLO "https://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-${GUAC_VER}.tar.gz" \
