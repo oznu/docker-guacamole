@@ -1,6 +1,10 @@
+[![Docker Build Status](https://img.shields.io/docker/build/oznu/guacamole.svg?label=x64%20build&style=for-the-badge)](https://hub.docker.com/r/oznu/guacamole/) [![Travis](https://img.shields.io/travis/oznu/docker-guacamole.svg?label=arm%20build&style=for-the-badge)](https://travis-ci.org/oznu/docker-guacamole) [![Docker Pulls](https://img.shields.io/docker/pulls/oznu/guacamole.svg?style=for-the-badge)](https://hub.docker.com/r/oznu/guacamole/)
+
 # Docker Guacamole
 
-A Docker Container for [Apache Guacamole](https://guacamole.incubator.apache.org/), a clientless remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH over HTML5.
+A Docker Container for [Apache Guacamole](https://guacamole.incubator.apache.org/), a client-less remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH over HTML5.
+
+This image will run on most platforms that support Docker including Docker for Mac, Docker for Windows, Synology DSM and Raspberry Pi 2/3 boards.
 
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/esgaHNRxdhY/0.jpg)](http://www.youtube.com/watch?v=esgaHNRxdhY "Video Title")
 
@@ -14,6 +18,19 @@ docker run \
   -v </path/to/config>:/config \
   oznu/guacamole
 ```
+
+## Raspberry Pi 2+ / ARMv7
+
+This image will also allow you to run [Apache Guacamole](https://guacamole.incubator.apache.org/) on a Raspberry Pi 2/3 or other Docker-enabled ARMv7/8 devices by using the `armhf` tag.
+
+```shell
+docker run \
+  -p 8080:8080 \
+  -v </path/to/config>:/config \
+  oznu/guacamole:armhf
+```
+
+*This image will not run on ARMv6 devices such as the original Raspberry Pi 1 or the Raspberry Pi Zero.*
 
 ## Parameters
 
