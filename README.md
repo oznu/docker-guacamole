@@ -19,9 +19,9 @@ docker run \
   oznu/guacamole
 ```
 
-## Raspberry Pi 2+ / ARMv7
+## Raspberry Pi / ARMv6
 
-This image will also allow you to run [Apache Guacamole](https://guacamole.incubator.apache.org/) on a Raspberry Pi 2/3 or other Docker-enabled ARMv7/8 devices by using the `armhf` tag.
+This image will also allow you to run [Apache Guacamole](https://guacamole.incubator.apache.org/) on a Raspberry Pi or other Docker-enabled ARMv5/6/7/8 devices by using the `armhf` tag.
 
 ```shell
 docker run \
@@ -29,8 +29,6 @@ docker run \
   -v </path/to/config>:/config \
   oznu/guacamole:armhf
 ```
-
-*This image will not run on ARMv6 devices such as the original Raspberry Pi 1 or the Raspberry Pi Zero.*
 
 ## Parameters
 
