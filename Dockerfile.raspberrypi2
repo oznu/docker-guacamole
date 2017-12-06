@@ -1,6 +1,6 @@
-FROM library/tomcat:7-jre8
+FROM arm32v7/tomcat:7-jre8
 
-ENV ARCH=amd64 \
+ENV ARCH=armhf \
   GUAC_VER=0.9.13-incubating \
   GUACAMOLE_HOME=/app/guacamole \
   PG_MAJOR=9.6 \
