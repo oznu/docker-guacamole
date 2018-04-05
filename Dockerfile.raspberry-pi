@@ -1,7 +1,7 @@
 FROM arm32v5/tomcat:7-jre8
 
 ENV ARCH=armhf \
-  GUAC_VER=0.9.13-incubating \
+  GUAC_VER=0.9.14 \
   GUACAMOLE_HOME=/app/guacamole \
   PG_MAJOR=9.6 \
   PGDATA=/config/postgres \
@@ -46,18 +46,20 @@ RUN curl -SLO "https://sourceforge.net/projects/guacamole/files/current/source/g
   && ldconfig
 
 # Install guacamole-client and postgres auth adapter
-RUN rm -rf ${CATALINA_HOME}/webapps/ROOT \
+RUN set -x \
+  && rm -rf ${CATALINA_HOME}/webapps/ROOT \
   && curl -SLo ${CATALINA_HOME}/webapps/ROOT.war "https://sourceforge.net/projects/guacamole/files/current/binary/guacamole-${GUAC_VER}.war" \
   && curl -SLo ${GUACAMOLE_HOME}/lib/postgresql-42.1.4.jar "https://jdbc.postgresql.org/download/postgresql-42.1.4.jar" \
   && curl -SLO https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-${GUAC_VER}.tar.gz \
   && tar -xzf guacamole-auth-jdbc-${GUAC_VER}.tar.gz \
-  && cp -R guacamole-auth-jdbc-${GUAC_VER}/postgresql/guacamole-auth-jdbc-postgresql-0.9.13-incubating.jar ${GUACAMOLE_HOME}/extensions/ \
+  && cp -R guacamole-auth-jdbc-${GUAC_VER}/postgresql/guacamole-auth-jdbc-postgresql-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions/ \
   && cp -R guacamole-auth-jdbc-${GUAC_VER}/postgresql/schema ${GUACAMOLE_HOME}/ \
   && rm -rf guacamole-auth-jdbc-${GUAC_VER} guacamole-auth-jdbc-${GUAC_VER}.tar.gz
 
 # Add optional extensions
-RUN mkdir ${GUACAMOLE_HOME}/extensions-available \
-  && for i in auth-ldap auth-duo auth-header auth-noauth auth-cas; do \
+RUN set -xe \
+  && mkdir ${GUACAMOLE_HOME}/extensions-available \
+  && for i in auth-ldap auth-duo auth-header auth-noauth auth-cas auth-openid; do \
     echo "https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-${i}-${GUAC_VER}.tar.gz" \
     && curl -SLO "https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-${i}-${GUAC_VER}.tar.gz" \
     && tar -xzf guacamole-${i}-${GUAC_VER}.tar.gz \

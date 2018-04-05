@@ -54,10 +54,11 @@ docker run \
 
 Currently the available extensions are:
 
-* auth-ldap - [LDAP Authentication](https://guacamole.incubator.apache.org/doc/0.9.13-incubating/gug/ldap-auth.html)
-* auth-duo - [Duo two-factor authentication](https://guacamole.incubator.apache.org/doc/0.9.13-incubating/gug/duo-auth.html)
-* auth-header - [HTTP header authentication](https://guacamole.incubator.apache.org/doc/0.9.13-incubating/gug/header-auth.html)
-* auth-cas - [CAS Authentication](https://guacamole.incubator.apache.org/doc/0.9.13-incubating/gug/cas-auth.html)
+* auth-ldap - [LDAP Authentication](https://guacamole.incubator.apache.org/doc/0.9.14/gug/ldap-auth.html)
+* auth-duo - [Duo two-factor authentication](https://guacamole.incubator.apache.org/doc/0.9.14/gug/duo-auth.html)
+* auth-header - [HTTP header authentication](https://guacamole.incubator.apache.org/doc/0.9.14/gug/header-auth.html)
+* auth-cas - [CAS Authentication](https://guacamole.incubator.apache.org/doc/0.9.14/gug/cas-auth.html)
+* auth-openid - [OpenID Connect authentication](http://guacamole.apache.org/doc/0.9.14/gug/openid-auth.html)
 
 You should only enable the extensions you require, if an extensions is not configured correctly in the `guacamole.properties` file it may prevent the system from loading. See the [official documentation](https://guacamole.incubator.apache.org/doc/0.9.13-incubating/gug/) for more details.
 

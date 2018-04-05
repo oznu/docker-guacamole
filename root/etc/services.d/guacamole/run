@@ -11,6 +11,12 @@ if [ $? -ne 0 ]; then
   createuser -U postgres $POSTGRES_USER
   createdb -U postgres -O $POSTGRES_USER $POSTGRES_DB
   cat /app/guacamole/schema/*.sql | psql -U $POSTGRES_USER -d $POSTGRES_DB -f -
+  echo "0.9.14" > /config/.database-version
+else
+  if [ "$(cat /config/.database-version)" != "0.9.14" ]; then
+    cat /app/guacamole/schema/upgrade/upgrade-pre-0.9.14.sql | psql -U $POSTGRES_USER -d $POSTGRES_DB -f -
+    echo "0.9.14" > /config/.database-version
+  fi
 fi
 
 echo "Starting guacamole client..."
