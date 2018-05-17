@@ -66,12 +66,12 @@ You should only enable the extensions you require, if an extensions is not confi
 
 The default username is `guacadmin` with password `guacadmin`.
 
-## On Windows
-Docker host drive mounts dont work properly on windows. To use postgress you must mount the config directoy inside of the docker vm. This uses a local driver to do this, be careful to gracefully shutdown or data will be lost, docker-compose:
+## Windows-based Docker Hosts
 
-```
-version: "3.5"
+Mapped volumes behave differently when running Docker for Windows and you may encounter some issues with PostgreSQL file system permissions. To avoid these issues, and still retain your config between container upgrades and recreation, you can use the local volume driver, as shown in the `docker-compose.yml` example below. When using this setup be careful to gracefully stop the container or data may be lost.
 
+```yml
+version: "2"
 services:
   guacamole:
     image: oznu/guacamole
@@ -80,8 +80,6 @@ services:
       - postgres:/config
     ports:
       - 8080:8080
-    network_mode: "bridge"
-
 volumes:
   postgres:
     driver: local
