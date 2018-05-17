@@ -1,4 +1,4 @@
-FROM arm32v5/tomcat:7-jre8
+FROM arm32v5/tomcat:9-jre8
 
 ENV ARCH=armhf \
   GUAC_VER=0.9.14 \
