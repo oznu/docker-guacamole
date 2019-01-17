@@ -70,6 +70,11 @@ RUN set -xe \
 ENV PATH=/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH
 ENV GUACAMOLE_HOME=/config/guacamole
 
+WORKDIR ${GUACAMOLE_HOME}/extensions
+
+RUN set -xe \
+  && rm -rf ! *${GUAC_VER}*
+  
 WORKDIR /config
 
 COPY root /
