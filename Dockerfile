@@ -1,7 +1,7 @@
 FROM library/tomcat:9-jre8
 
 ENV ARCH=amd64 \
-  GUAC_VER=0.9.14 \
+  GUAC_VER=1.0.0 \
   GUACAMOLE_HOME=/app/guacamole \
   PG_MAJOR=9.6 \
   PGDATA=/config/postgres \
@@ -35,7 +35,7 @@ RUN [ "$ARCH" = "armhf" ] && ln -s /usr/local/lib/freerdp /usr/lib/arm-linux-gnu
 RUN [ "$ARCH" = "amd64" ] && ln -s /usr/local/lib/freerdp /usr/lib/x86_64-linux-gnu/freerdp || exit 0
 
 # Install guacamole-server
-RUN curl -SLO "https://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-${GUAC_VER}.tar.gz" \
+RUN curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/source/guacamole-server-${GUAC_VER}.tar.gz" \
   && tar -xzf guacamole-server-${GUAC_VER}.tar.gz \
   && cd guacamole-server-${GUAC_VER} \
   && ./configure \
@@ -48,9 +48,9 @@ RUN curl -SLO "https://sourceforge.net/projects/guacamole/files/current/source/g
 # Install guacamole-client and postgres auth adapter
 RUN set -x \
   && rm -rf ${CATALINA_HOME}/webapps/ROOT \
-  && curl -SLo ${CATALINA_HOME}/webapps/ROOT.war "https://sourceforge.net/projects/guacamole/files/current/binary/guacamole-${GUAC_VER}.war" \
+  && curl -SLo ${CATALINA_HOME}/webapps/ROOT.war "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-${GUAC_VER}.war" \
   && curl -SLo ${GUACAMOLE_HOME}/lib/postgresql-42.1.4.jar "https://jdbc.postgresql.org/download/postgresql-42.1.4.jar" \
-  && curl -SLO https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-${GUAC_VER}.tar.gz \
+  && curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-auth-jdbc-${GUAC_VER}.tar.gz" \
   && tar -xzf guacamole-auth-jdbc-${GUAC_VER}.tar.gz \
   && cp -R guacamole-auth-jdbc-${GUAC_VER}/postgresql/guacamole-auth-jdbc-postgresql-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions/ \
   && cp -R guacamole-auth-jdbc-${GUAC_VER}/postgresql/schema ${GUACAMOLE_HOME}/ \
@@ -59,9 +59,9 @@ RUN set -x \
 # Add optional extensions
 RUN set -xe \
   && mkdir ${GUACAMOLE_HOME}/extensions-available \
-  && for i in auth-ldap auth-duo auth-header auth-noauth auth-cas auth-openid; do \
-    echo "https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-${i}-${GUAC_VER}.tar.gz" \
-    && curl -SLO "https://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-${i}-${GUAC_VER}.tar.gz" \
+  && for i in auth-ldap auth-duo auth-header auth-cas auth-openid auth-quickconnect auth-totp; do \
+    echo "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-${i}-${GUAC_VER}.tar.gz" \
+    && curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-${i}-${GUAC_VER}.tar.gz" \
     && tar -xzf guacamole-${i}-${GUAC_VER}.tar.gz \
     && cp guacamole-${i}-${GUAC_VER}/guacamole-${i}-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions-available/ \
     && rm -rf guacamole-${i}-${GUAC_VER} guacamole-${i}-${GUAC_VER}.tar.gz \

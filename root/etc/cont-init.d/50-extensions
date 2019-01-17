@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv sh
 
 # clean up extensions
-for i in auth-ldap auth-duo auth-header auth-noauth auth-cas auth-openid; do
+for i in auth-ldap auth-duo auth-header auth-cas auth-openid auth-quickconnect auth-totp; do
   rm -rf ${GUACAMOLE_HOME}/extensions/guacamole-${i}-${GUAC_VER}.jar
 done
 
