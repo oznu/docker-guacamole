@@ -5,6 +5,10 @@ for i in auth-ldap auth-duo auth-header auth-cas auth-openid auth-quickconnect a
   rm -rf ${GUACAMOLE_HOME}/extensions/guacamole-${i}-${GUAC_VER}.jar
 done
 
+# clean up old extentions
+cd ${GUACAMOLE_HOME}/extensions/
+ls | grep -v ${GUAC_VER} | xargs rm
+
 # enable extensions
 for i in $(echo "$EXTENSIONS" | tr "," " "); do
   cp ${GUACAMOLE_HOME}/extensions-available/guacamole-${i}-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions
