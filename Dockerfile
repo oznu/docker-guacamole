@@ -1,7 +1,7 @@
 FROM library/tomcat:9-jre11
 
 ENV ARCH=amd64 \
-  GUAC_VER=1.0.0 \
+  GUAC_VER=1.1.0 \
   GUACAMOLE_HOME=/app/guacamole \
   PG_MAJOR=9.6 \
   PGDATA=/config/postgres \
@@ -24,9 +24,9 @@ WORKDIR ${GUACAMOLE_HOME}
 RUN apt-get update && apt-get install -y \
     libcairo2-dev libjpeg62-turbo-dev libpng-dev \
     libossp-uuid-dev libavcodec-dev libavutil-dev \
-    libswscale-dev libfreerdp-dev libpango1.0-dev \
+    libswscale-dev freerdp2-dev libfreerdp-client2-2 libpango1.0-dev \
     libssh2-1-dev libtelnet-dev libvncserver-dev \
-    libpulse-dev libssl-dev libvorbis-dev libwebp-dev \
+    libpulse-dev libssl-dev libvorbis-dev libwebp-dev libwebsockets-dev \
     ghostscript postgresql-${PG_MAJOR} \
   && rm -rf /var/lib/apt/lists/*
 
