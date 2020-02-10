@@ -1,4 +1,4 @@
-FROM library/tomcat:9-jre8
+FROM library/tomcat:9-jre11
 
 ENV ARCH=amd64 \
   GUAC_VER=1.0.0 \
