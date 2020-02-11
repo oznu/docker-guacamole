@@ -2,8 +2,25 @@ services:
   - docker
 
 env:
-  - DOCKERFILE="Dockerfile" TAG_SUFFIX="amd64" BUILDX_PALTFORM="linux/arm"
+  - DOCKERFILE="Dockerfile" TAG_SUFFIX="amd64"
   - DOCKERFILE="Dockerfile.raspberry-pi" TAG_SUFFIX="arm32v5" ALT_SUFFIX="armhf"
+
+matrix:
+  include:
+    # amd64
+    - os: linux
+      arch: amd64
+      env:
+        - DOCKERFILE="Dockerfile"
+        - TAG_SUFFIX="amd64"
+
+    # arm32v5
+    - os: linux
+      arch: arm64
+      env:
+        - DOCKERFILE="Dockerfile.raspberry-pi"
+        - TAG_SUFFIX="arm32v5"
+        - ALT_SUFFIX="armhf"
 
 before_script:
   # update docker to edge
@@ -13,7 +30,7 @@ before_script:
 script:
   - export TARGET_IMAGE_TAG=$(if [ "$TRAVIS_BRANCH" = "master" ]; then if [ "$TAG_SUFFIX" = "" ]; then echo "latest"; else echo "$TAG_SUFFIX"; fi; else if [ "$TAG_SUFFIX" = "" ]; then echo "$TRAVIS_BRANCH"; else echo "$TRAVIS_BRANCH-$TAG_SUFFIX"; fi; fi)
   - docker pull $TARGET_IMAGE:$TARGET_IMAGE_TAG && export IMAGE_CACHE="--cache-from $TARGET_IMAGE:$TARGET_IMAGE_TAG" || export IMAGE_CACHE=""
-  - docker buildx build --platform $BUILDX_PALTFORM -f $DOCKERFILE $IMAGE_CACHE -t $TARGET_IMAGE:$TARGET_IMAGE_TAG .
+  - docker build -f $DOCKERFILE $IMAGE_CACHE -t $TARGET_IMAGE:$TARGET_IMAGE_TAG .
   - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
   - docker push $TARGET_IMAGE:$TARGET_IMAGE_TAG
 
