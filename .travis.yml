@@ -18,11 +18,6 @@ matrix:
         - TAG_SUFFIX="arm32v5"
         - ALT_SUFFIX="armhf"
 
-before_script:
-  # update docker to edge
-  - sudo apt update -y
-  - sudo apt install --only-upgrade docker-ce -y
-
 script:
   - export TARGET_IMAGE_TAG=$(if [ "$TRAVIS_BRANCH" = "master" ]; then if [ "$TAG_SUFFIX" = "" ]; then echo "latest"; else echo "$TAG_SUFFIX"; fi; else if [ "$TAG_SUFFIX" = "" ]; then echo "$TRAVIS_BRANCH"; else echo "$TRAVIS_BRANCH-$TAG_SUFFIX"; fi; fi)
   - docker pull $TARGET_IMAGE:$TARGET_IMAGE_TAG && export IMAGE_CACHE="--cache-from $TARGET_IMAGE:$TARGET_IMAGE_TAG" || export IMAGE_CACHE=""
