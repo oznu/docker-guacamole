@@ -1,10 +1,6 @@
 services:
   - docker
 
-env:
-  - DOCKERFILE="Dockerfile" TAG_SUFFIX="amd64"
-  - DOCKERFILE="Dockerfile.raspberry-pi" TAG_SUFFIX="arm32v5" ALT_SUFFIX="armhf"
-
 matrix:
   include:
     # amd64
