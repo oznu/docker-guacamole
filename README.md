@@ -1,4 +1,4 @@
-[![Docker Build Status](https://img.shields.io/docker/build/oznu/guacamole.svg?label=x64%20build&style=for-the-badge)](https://hub.docker.com/r/oznu/guacamole/) [![Travis](https://img.shields.io/travis/oznu/docker-guacamole.svg?label=arm%20build&style=for-the-badge)](https://travis-ci.org/oznu/docker-guacamole) [![Docker Pulls](https://img.shields.io/docker/pulls/oznu/guacamole.svg?style=for-the-badge)](https://hub.docker.com/r/oznu/guacamole/)
+[![Docker Build Status](https://img.shields.io/docker/build/oznu/guacamole.svg?label=x64%20build)](https://hub.docker.com/r/oznu/guacamole/) [![Travis](https://img.shields.io/travis/oznu/docker-guacamole.svg?label=arm%20build)](https://travis-ci.org/oznu/docker-guacamole) [![Docker Pulls](https://img.shields.io/docker/pulls/oznu/guacamole.svg)](https://hub.docker.com/r/oznu/guacamole/)
 
 # Docker Guacamole
 
@@ -85,3 +85,11 @@ volumes:
   postgres:
     driver: local
 ```
+
+## License
+
+Copyright (C) 2017-2020 oznu
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the [GNU General Public License](./LICENSE) for more details.
