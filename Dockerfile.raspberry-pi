@@ -1,7 +1,7 @@
 FROM arm32v5/tomcat:9-jre11
 
 ENV ARCH=armhf \
-  GUAC_VER=1.1.0 \
+  GUAC_VER=1.2.0 \
   GUACAMOLE_HOME=/app/guacamole \
   PG_MAJOR=9.6 \
   PGDATA=/config/postgres \
