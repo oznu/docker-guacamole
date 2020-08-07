@@ -12,7 +12,8 @@ matrix:
       arch: amd64
       env:
         - DOCKERFILE="Dockerfile"
-        - TAG_SUFFIX="amd64"
+        - TAG_SUFFIX="latest"
+        - ALT_SUFFIX="amd64"
 
     # arm32v5
     - os: linux
