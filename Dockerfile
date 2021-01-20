@@ -1,7 +1,9 @@
 FROM tomcat:jdk15-openjdk-slim-buster
 
-ENV ARCH=aarch64 \
-GUAC_VER=1.3.0 \
+ARG ARCH GUAC_VER
+
+ENV ARCH=$ARCH \
+GUAC_VER=$GUAC_VER \
 GUACAMOLE_HOME=/app/guacamole \
 PG_MAJOR=11 \
 PGDATA=/config/postgres \
@@ -44,7 +46,7 @@ RUN apt-get update && apt-get -t buster-backports install -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Link FreeRDP to where guac expects it to be
-RUN [ "$ARCH" = "aarch64" ] && ln -s /usr/local/lib/freerdp /usr/lib/${ARCH}-linux-gnu/freerdp || exit 0
+RUN ln -s /usr/local/lib/freerdp /usr/lib/${ARCH}-linux-gnu/freerdp || exit 0
 
 # Install guacamole-server
 RUN curl -SLO "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/source/guacamole-server-${GUAC_VER}.tar.gz" \
