@@ -7,21 +7,13 @@ services:
 
 matrix:
   include:
-    # amd64
-    - os: linux
-      arch: amd64
-      env:
-        - DOCKERFILE="Dockerfile"
-        - TAG_SUFFIX="latest"
-        - ALT_SUFFIX="amd64"
-
-    # arm32v5
+    # aarch64
     - os: linux
       arch: arm64
       env:
-        - DOCKERFILE="Dockerfile.raspberry-pi"
-        - TAG_SUFFIX="arm32v5"
-        - ALT_SUFFIX="armhf"
+        - DOCKERFILE="Dockerfile.arm64"
+        - TAG_SUFFIX="arm64"
+        - ALT_SUFFIX="aarch64"
 
 script:
   - export TARGET_IMAGE_TAG=$(if [ "$TRAVIS_BRANCH" = "master" ]; then if [ "$TAG_SUFFIX" = "" ]; then echo "latest"; else echo "$TAG_SUFFIX"; fi; else if [ "$TAG_SUFFIX" = "" ]; then echo "$TRAVIS_BRANCH"; else echo "$TRAVIS_BRANCH-$TAG_SUFFIX"; fi; fi)
