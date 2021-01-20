@@ -1,12 +1,12 @@
 FROM tomcat:jdk15-openjdk-slim-buster
 
 ENV ARCH=aarch64
-GUAC_VER=1.3.0
-GUACAMOLE_HOME=/app/guacamole
-PG_MAJOR=11
-PGDATA=/config/postgres
-POSTGRES_USER=guacamole
-POSTGRES_DB=guacamole_db
+ENV GUAC_VER=1.3.0
+ENV GUACAMOLE_HOME=/app/guacamole
+ENV PG_MAJOR=11
+ENV PGDATA=/config/postgres
+ENV POSTGRES_USER=guacamole
+ENV POSTGRES_DB=guacamole_db
 
 #Add essential packages
 RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y curl apt-utils postgresql ghostscript
