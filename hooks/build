@@ -1,3 +1,10 @@
 #!/bin/bash
 
-docker build -t $IMAGE_NAME --build-arg ARCH=$ARCH GUAC_VER=$GUAC_VER .
+GUAC_VER=$(echo $DOCKER_TAG | cut -d "-" -f2)
+
+if [ $DOCKER_TAG == "latest" ]
+then
+  docker build . --build-arg GUAC_VER=${DOCKER_TAG} ARCH=${ARCH} -t ${IMAGE_NAME}
+else
+  docker build . --build-arg GUAC_VER=${GUAC_VER} ARCH=${ARCH} -t ${IMAGE_NAME}
+fi
