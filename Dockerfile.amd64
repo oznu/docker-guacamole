@@ -1,8 +1,8 @@
 FROM tomcat:jdk15-openjdk-slim-buster
 
-ARG ARCH GUAC_VER
+ARG GUAC_VER
 
-ENV ARCH=$ARCH \
+ENV ARCH=aarch64 \
 GUAC_VER=$GUAC_VER \
 GUACAMOLE_HOME=/app/guacamole \
 PG_MAJOR=11 \
