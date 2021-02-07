@@ -1,4 +1,4 @@
-**This project is now archived and no longer supported. If you maintain a replacement and you like me to link to your repo please contact me.**
+**This project is now archived and no longer supported. If you maintain a replacement and you would like me to link to your repo please contact me.**
 
 # Docker Guacamole
 
