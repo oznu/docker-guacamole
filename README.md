@@ -1,4 +1,4 @@
-[![Docker Build Status](https://img.shields.io/docker/build/oznu/guacamole.svg?label=x64%20build)](https://hub.docker.com/r/oznu/guacamole/) [![Travis](https://img.shields.io/travis/oznu/docker-guacamole.svg?label=arm%20build)](https://travis-ci.org/oznu/docker-guacamole) [![Docker Pulls](https://img.shields.io/docker/pulls/oznu/guacamole.svg)](https://hub.docker.com/r/oznu/guacamole/)
+**This project is now archived and no longer supported. If you maintain a replacement and you like me to link to your repo please contact me.**
 
 # Docker Guacamole
 
